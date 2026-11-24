@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: GPL-2.0-only
+# Fragment for drivers/input/touchscreen/Kconfig (in-tree integration).
+# Add to drivers/input/touchscreen/Makefile:
+#   obj-$(CONFIG_TOUCHSCREEN_NWFERMI)	+= nwfermi.o
+#   nwfermi-y := nwfermi_usb.o nwfermi_engine.o
+
+config TOUCHSCREEN_NWFERMI
+	tristate "NextWindow Fermi optical touchscreen"
+	depends on USB_ARCH_HAS_HCD
+	select USB
+	help
+	  Say Y here if you have a NextWindow Fermi optical touchscreen
+	  (USB vendor 0x1926), as fitted to a number of all-in-one PCs and
+	  touch monitors.
+
+	  The controller streams raw camera data; the driver finds finger
+	  shadows in it and triangulates them using the lens and calibration
+	  data stored in the controller.  No userspace helper is needed.
+
+	  To compile this driver as a module, choose M here: the
+	  module will be called nwfermi.
